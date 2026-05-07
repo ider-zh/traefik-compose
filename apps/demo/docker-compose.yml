@@ -1,0 +1,23 @@
+services:
+  # 示例 1: 基础服务与负载均衡
+  whoami:
+    image: traefik/whoami
+    deploy:
+      replicas: 3
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`demo.${BASE_DOMAIN}`)"
+      - "traefik.http.routers.whoami.entrypoints=websecure"
+      - "traefik.http.routers.whoami.tls.certresolver=cloudflare"
+
+      # 负载均衡策略
+      - "traefik.http.services.whoami.loadbalancer.sticky.cookie=true"
+      - "traefik.http.services.whoami.loadbalancer.server.port=80"
+      # 中间件演示 (使用预定义的 default-headers)
+      - "traefik.http.routers.whoami.middlewares=default-headers@file"
+
+networks:
+  web:
+    external: true

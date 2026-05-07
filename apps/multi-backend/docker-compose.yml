@@ -1,0 +1,28 @@
+services:
+  app-v1:
+    image: traefik/whoami
+    container_name: app-v1
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app-v1.rule=Host(`multi.${BASE_DOMAIN}`)"
+      - "traefik.http.routers.app-v1.entrypoints=websecure"
+      - "traefik.http.routers.app-v1.tls.certresolver=cloudflare"
+      - "traefik.http.services.app-v1.loadbalancer.server.port=80"
+  
+  app-v2:
+    image: traefik/whoami
+    container_name: app-v2
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app-v2.rule=Host(`multi.${BASE_DOMAIN}`)"
+      - "traefik.http.routers.app-v2.entrypoints=websecure"
+      - "traefik.http.routers.app-v2.tls.certresolver=cloudflare"
+      - "traefik.http.services.app-v2.loadbalancer.server.port=80"
+
+networks:
+  web:
+    external: true

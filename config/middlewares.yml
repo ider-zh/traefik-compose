@@ -1,0 +1,17 @@
+http:
+  middlewares:
+    # 身份验证
+    auth:
+      basicAuth:
+        users:
+          - "test:$2a$12$Z0G.P.e2H3h2zG5p9l8eO.u0k5nK6G3x9h7a.m5T9q3K4v5w6m9q6" # 用户名: test, 密码: test
+    # 限流
+    rate-limit:
+      rateLimit:
+        average: 5
+        burst: 10
+    # 路径剥离
+    strip-prefix:
+      stripPrefix:
+        prefixes:
+          - "/strip"

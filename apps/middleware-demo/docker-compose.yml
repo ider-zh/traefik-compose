@@ -1,0 +1,29 @@
+services:
+  middleware-app:
+    image: traefik/whoami
+    container_name: middleware-demo
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      # 1. 鉴权演示
+      - "traefik.http.routers.auth.rule=Host(`auth.${BASE_DOMAIN}`)"
+      - "traefik.http.routers.auth.entrypoints=websecure"
+      - "traefik.http.routers.auth.tls.certresolver=cloudflare"
+      - "traefik.http.routers.auth.middlewares=auth@file"
+
+      # 2. 限流演示
+      - "traefik.http.routers.limit.rule=Host(`limit.${BASE_DOMAIN}`)"
+      - "traefik.http.routers.limit.entrypoints=websecure"
+      - "traefik.http.routers.limit.tls.certresolver=cloudflare"
+      - "traefik.http.routers.limit.middlewares=rate-limit@file"
+
+      # 3. 路径剥离演示
+      - "traefik.http.routers.strip.rule=Host(`strip.${BASE_DOMAIN}`) && PathPrefix(`/strip`)"
+      - "traefik.http.routers.strip.entrypoints=websecure"
+      - "traefik.http.routers.strip.tls.certresolver=cloudflare"
+      - "traefik.http.routers.strip.middlewares=strip-prefix@file"
+
+networks:
+  web:
+    external: true

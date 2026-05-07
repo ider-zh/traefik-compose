@@ -1,0 +1,32 @@
+services:
+  # 示例: 代理宿主机上的本地服务 (需确保宿主机服务绑定在 0.0.0.0)
+  localhost-service:
+    image: traefik/whoami # 仅作占位，实际替换为您宿主机运行的服务
+    container_name: localhost-proxy
+    networks:
+      - web
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.local.rule=Host(`local.${BASE_DOMAIN}`)"
+      - "traefik.http.routers.local.entrypoints=websecure"
+      - "traefik.http.routers.local.tls.certresolver=cloudflare"
+      - "traefik.http.services.local.loadbalancer.server.url=http://host.docker.internal:8080"
+
+  # 示例: 代理外部已存在的服务 (利用 Traefik 作为转发层)
+  external-service:
+    image: traefik/whoami
+    container_name: external-proxy
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ext.rule=Host(`httpbin.${BASE_DOMAIN}`)"
+      - "traefik.http.routers.ext.entrypoints=websecure"
+      - "traefik.http.routers.ext.tls.certresolver=cloudflare"
+      - "traefik.http.services.ext.loadbalancer.server.url=https://httpbin.org"
+
+networks:
+  web:
+    external: true

@@ -1,0 +1,16 @@
+services:
+  echo:
+    image: alpine:latest
+    command: ["nc", "-lk", "-p", "8080", "-e", "echo", "TCP Hello!"]
+    networks:
+      - web
+    labels:
+      - "traefik.enable=true"
+      # TCP 服务使用特定子域名
+      - "traefik.tcp.routers.echo.rule=HostSNI(`tcp.${BASE_DOMAIN}`)"
+      - "traefik.tcp.routers.echo.entrypoints=websecure"
+      - "traefik.tcp.services.echo.loadbalancer.server.port=8080"
+
+networks:
+  web:
+    external: true
