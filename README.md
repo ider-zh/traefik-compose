@@ -21,7 +21,7 @@
 
 - **负载均衡 (`apps/multi-backend`)**: 演示如何通过多个后端副本实现流量分配。
 - **TCP 代理 (`apps/tcp-service`)**: 演示如何通过 Traefik 代理 TCP 流量。
-- **Traefik Home (`apps/traefik-home`)**: 一个简洁的仪表板，用于查看您的 Traefik 路由。
+- **Traefik Home (`apps/traefik-home`)**: 一个简洁的可视化仪表板，可以实时查看当前集群中所有被 Traefik 发现的容器服务及其对应的路由规则。
 - **外部代理 (`apps/external-proxy`)**: 演示如何代理宿主机本地服务及转发外部域名。
 - **中间件演示 (`apps/middleware-demo`)**: 演示 Basic Auth、限流和路径剥离功能。
 
