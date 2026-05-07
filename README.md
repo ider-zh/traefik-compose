@@ -21,15 +21,14 @@
 
 - **负载均衡 (`apps/multi-backend`)**: 演示如何通过多个后端副本实现流量分配。
 - **TCP 代理 (`apps/tcp-service`)**: 演示如何通过 Traefik 代理 TCP 流量。
-- **Traefik Home (`apps/traefik-home`)**: 一个简洁的仪表板，用于查看您的 Traefik 路由。请在 `.env` 中设置 `HOME_DOMAIN`。
+- **Traefik Home (`apps/traefik-home`)**: 一个简洁的仪表板，用于查看您的 Traefik 路由。
 - **外部代理 (`apps/external-proxy`)**: 演示如何代理宿主机本地服务及转发外部域名。
 - **中间件演示 (`apps/middleware-demo`)**: 演示 Basic Auth、限流和路径剥离功能。
 
 ### 运行示例
-- 启动负载均衡示例: `make multi-up`
-- 启动 TCP 代理示例: `make tcp-up`
-- 启动 Traefik Home 仪表板: `make home-up`
-- 启动外部代理示例: `make ext-up`
-- 启动中间件演示: `make mid-up`
-- 运行测试: `make test`
+所有服务将自动使用 `BASE_DOMAIN` 环境变量作为基础域名（例如：`demo.${BASE_DOMAIN}`）。
+
+- 启动所有演示: `make demo-all-up`
+- 启动特定示例 (如负载均衡): `make multi-up`
+- 运行自动化测试: `make test`
 
