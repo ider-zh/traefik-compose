@@ -1,6 +1,6 @@
-# Traefik v3 Compose
+re# Traefik v3 Compose
 
-[English](README.en.md) | [中文](README.zh.md) | [日本語](README.ja.md)
+[English](README.md) | [中文](README.zh.md) | [日本語](README.ja.md)
 
 This repository provides a reverse proxy solution based on Traefik v3, integrating Cloudflare DNS-01 validation for automatic HTTPS configuration and container auto-discovery.
 
