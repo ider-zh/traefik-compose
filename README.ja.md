@@ -1,6 +1,6 @@
 # Traefik v3 Compose
 
-[English](README.en.md) | [中文](README.zh.md) | [日本語](README.ja.md)
+[English](README.md) | [中文](README.zh.md) | [日本語](README.ja.md)
 
 このリポジトリは、Traefik v3 をベースにしたリバースプロキシ構成を提供します。Cloudflare DNS-01 認証を統合し、HTTPS の自動設定とコンテナの自動検出を実現します。
 

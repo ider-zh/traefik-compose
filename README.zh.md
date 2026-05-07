@@ -1,6 +1,6 @@
 # Traefik v3 Compose
 
-[English](README.en.md) | [中文](README.zh.md) | [日本語](README.ja.md)
+[English](README.md) | [中文](README.zh.md) | [日本語](README.ja.md)
 
 本仓库提供了一个基于 Traefik v3 的反向代理方案，集成了 Cloudflare DNS-01 验证以实现 HTTPS 自动配置与容器自动发现。
 
