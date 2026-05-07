@@ -8,7 +8,6 @@ services:
       - web
     labels:
       - "traefik.enable=true"
-      # English: Router rule / 日本語: ルーティングルール / 中文: 域名路由
       - "traefik.http.routers.whoami.rule=Host(`demo.${BASE_DOMAIN}`)"
       - "traefik.http.routers.whoami.entrypoints=websecure"
       - "traefik.http.routers.whoami.tls.certresolver=cloudflare"
