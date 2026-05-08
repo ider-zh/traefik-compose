@@ -18,6 +18,21 @@ services:
       - ./config/dynamic.yml:/config/dynamic.yml:ro
       - ./acme.json:/acme.json
 
+  traefik-home:
+    image: ghcr.io/santimar/traefik-home:latest
+    container_name: traefik-home
+    restart: unless-stopped
+    networks:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.home.rule=Host(`home.${BASE_DOMAIN}`)"
+      - "traefik.http.routers.home.entrypoints=websecure"
+      - "traefik.http.routers.home.tls.certresolver=cloudflare"
+      - "traefik.http.services.home.loadbalancer.server.port=80"
+
 networks:
   web:
     name: web
