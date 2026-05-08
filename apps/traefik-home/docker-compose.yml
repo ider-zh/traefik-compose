@@ -9,10 +9,10 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.home.rule=Host(`home.${BASE_DOMAIN}`)"
-      - "traefik.http.routers.home.entrypoints=websecure"
-      - "traefik.http.routers.home.tls.certresolver=cloudflare"
-      - "traefik.http.services.home.loadbalancer.server.port=80"
+      - "traefik.http.routers.home-traefik.rule=Host(`home.${BASE_DOMAIN}`)"
+      - "traefik.http.routers.home-traefik.entrypoints=websecure"
+      - "traefik.http.routers.home-traefik.tls.certresolver=cloudflare"
+      - "traefik.http.services.home-traefik.loadbalancer.server.port=80"
       # 可选：如果希望使用路径路由，例如 /dashboard
       # - "traefik.http.routers.home.rule=Host(`${TEST_DOMAIN}`) && PathPrefix(`/dashboard`)"
       # - "traefik.http.services.home.loadbalancer.server.port=80"
