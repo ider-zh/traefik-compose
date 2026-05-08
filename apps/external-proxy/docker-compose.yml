@@ -3,16 +3,20 @@ services:
   localhost-service:
     image: traefik/whoami # 仅作占位，实际替换为您宿主机运行的服务
     container_name: localhost-proxy
+    restart: unless-stopped
     networks:
       - web
     extra_hosts:
       - "host.docker.internal:host-gateway"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.local.rule=Host(`local.${BASE_DOMAIN}`)"
-      - "traefik.http.routers.local.entrypoints=websecure"
-      - "traefik.http.routers.local.tls.certresolver=cloudflare"
-      - "traefik.http.services.local.loadbalancer.server.url=http://host.docker.internal:8080"
+      - "traefik.http.routers.local_aionui.rule=Host(`aionui.${BASE_DOMAIN}`)"
+      - "traefik.http.routers.local_aionui.entrypoints=websecure"
+      - "traefik.http.routers.local_aionui.tls.certresolver=cloudflare"
+      - "traefik.http.services.local_aionui.loadbalancer.server.url=http://host.docker.internal:25808"
+      - "traefik-home.alias=aion"
+
+
 
   # 示例: 代理外部已存在的服务 (利用 Traefik 作为转发层)
   external-service:
@@ -26,6 +30,7 @@ services:
       - "traefik.http.routers.ext.entrypoints=websecure"
       - "traefik.http.routers.ext.tls.certresolver=cloudflare"
       - "traefik.http.services.ext.loadbalancer.server.url=https://httpbin.org"
+      - "traefik-home.alias=httpbin"
 
 networks:
   web:
