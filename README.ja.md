@@ -23,7 +23,7 @@
 
 - **負荷分散 (`apps/multi-backend`)**: 複数のバックエンドレプリカ間でトラフィックを分散する方法。
 - **TCP プロキシ (`apps/tcp-service`)**: Traefik を介して TCP トラフィックをプロキシする方法。
-- **Traefik Home (`apps/traefik-home`)**: Traefik によって検出されたすべてのコンテナサービスとそのルートをリアルタイムで確認できるシンプルなダッシュボード。
+- **Traefik Home (`apps/traefik-home`)**: Traefik によって検出されたすべてのコンテナサービスとそのルートをリアルタイムで確認できる、シンプルで直感的なダッシュボード。
 - **外部プロキシ (`apps/external-proxy`)**: ホストのローカルサービスや外部ドメインへの転送設定。
 - **ミドルウェアデモ (`apps/middleware-demo`)**: Basic Auth、レート制限、パス削除機能。
 
